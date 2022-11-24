@@ -48,20 +48,23 @@ type Props = ViroCommonProps & {
 };
 
 export class ViroScene extends ViroBase<Props> {
-  _onPlatformUpdate(event: NativeSyntheticEvent<ViroPlatformEvent>) {
+  _onPlatformUpdate = (
+    event: NativeSyntheticEvent<ViroPlatformUpdateEvent>
+  ) => {
     /**
      * ##### DEPRECATION WARNING - 'vrPlatform' is deprecated in favor of 'platform'! Support
      * for 'vrPlatform' may be removed in the future.
      */
-    event.nativeEvent.platformInfoViro.vrPlatform =
-      event.nativeEvent.platformInfoViro.platform;
+     event.nativeEvent.platformInfoViro.vrPlatform =
+     event.nativeEvent.platformInfoViro.platform;
     this.props.onPlatformUpdate &&
       this.props.onPlatformUpdate(event.nativeEvent.platformInfoViro);
-  }
+  };
+  
 
-  _onCameraTransformUpdate(
+  _onCameraTransformUpdate = (
     event: NativeSyntheticEvent<ViroCameraTransformEvent>
-  ) {
+  ) => {
     var cameraTransform = {
       // ** DEPRECATION WARNING ** The cameraTransform key will be deprecated in a future release,
       cameraTransform: {
@@ -112,12 +115,12 @@ export class ViroScene extends ViroBase<Props> {
   }
 
   // TODO: types for closest
-  async findCollisionsWithRayAsync(
+  findCollisionsWithRayAsync = async (
     from: Viro3DPoint,
     to: Viro3DPoint,
     closest: any,
     viroTag: string
-  ) {
+  ) => {
     return await NativeModules.VRTSceneModule.findCollisionsWithRayAsync(
       findNodeHandle(this),
       from,
@@ -127,13 +130,13 @@ export class ViroScene extends ViroBase<Props> {
     );
   }
 
-  async findCollisionsWithShapeAsync(
+  findCollisionsWithShapeAsync = async (
     from: Viro3DPoint,
     to: Viro3DPoint,
     shapeString: string,
     shapeParam: any,
     viroTag: string
-  ) {
+  ) => {
     return await NativeModules.VRTSceneModule.findCollisionsWithShapeAsync(
       findNodeHandle(this),
       from,
@@ -148,7 +151,7 @@ export class ViroScene extends ViroBase<Props> {
    * ##### DEPRECATION WARNING - this prop may be removed in future releases #####
    * @deprecated
    */
-  async getCameraPositionAsync() {
+  getCameraPositionAsync = async () =>  {
     console.warn(
       "[Viro] ViroScene.getCameraPositionAsync has been DEPRECATED. Please use getCameraOrientationAsync instead."
     );
@@ -159,7 +162,7 @@ export class ViroScene extends ViroBase<Props> {
     return position;
   }
 
-  async getCameraOrientationAsync() {
+  getCameraOrientationAsync = async () => {
     var orientation = await NativeModules.VRTCameraModule.getCameraOrientation(
       findNodeHandle(this)
     );
