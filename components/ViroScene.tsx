@@ -19,6 +19,7 @@ import {
   ViroCameraTransformEvent,
   ViroPlatformEvent,
   ViroPlatformInfo,
+  ViroPlatformUpdateEvent,
   ViroTrackingReason,
   ViroTrackingState,
 } from "./Types/ViroEvents";

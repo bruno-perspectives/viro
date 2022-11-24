@@ -1,7 +1,7 @@
 /// <reference types="react" />
 import { NativeSyntheticEvent } from "react-native";
 import { ViroCommonProps } from "./AR/ViroCommonProps";
-import { ViroCameraTransform, ViroCameraTransformEvent, ViroPlatformInfo, ViroTrackingReason, ViroTrackingState } from "./Types/ViroEvents";
+import { ViroCameraTransform, ViroCameraTransformEvent, ViroPlatformInfo, ViroPlatformUpdateEvent, ViroTrackingReason, ViroTrackingState } from "./Types/ViroEvents";
 import { Viro3DPoint, ViroPhysicsWorld, ViroSoundRoom } from "./Types/ViroUtils";
 import { ViroBase } from "./ViroBase";
 declare type Props = ViroCommonProps & {
