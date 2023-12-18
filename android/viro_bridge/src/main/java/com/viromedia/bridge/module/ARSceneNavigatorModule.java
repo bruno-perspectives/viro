@@ -331,7 +331,11 @@ public class ARSceneNavigatorModule extends ReactContextBaseJavaModule {
             reactActivity.requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
                     Manifest.permission.RECORD_AUDIO}, PERMISSION_REQ_CODE_AUDIO, listener);
         } else {
-            reactActivity.requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+             private val writeImagePermission = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) 
+              Manifest.permission.READ_MEDIA_IMAGES 
+          else 
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+            reactActivity.requestPermissions(new String[]{writeImagePermission},
                     PERMISSION_REQ_CODE_STORAGE, listener);
         }
     }
@@ -343,6 +347,11 @@ public class ARSceneNavigatorModule extends ReactContextBaseJavaModule {
     }
 
     private static boolean hasRecordingPermissions(Context context) {
-        return ContextCompat.checkSelfPermission(context, "android.permission.WRITE_EXTERNAL_STORAGE") == 0;
+        private val writeImagePermission = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) 
+             "android.permission.READ_MEDIA_IMAGES"
+          else 
+            "android.permission.WRITE_EXTERNAL_STORAGE"
+
+        return ContextCompat.checkSelfPermission(context, writeImagePermission) == 0;
     }
 }
